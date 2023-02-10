@@ -1,2 +1,3 @@
-/__pycache__
-/a.js
+images/*.png
+node_modules
+
