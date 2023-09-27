@@ -6,9 +6,10 @@ saveImageByURL = async (url, fileName) => {
     try {
         const iconUrl = await getAppIconUrl(url);
         await saveImage(iconUrl, fileName);
-        console.log("Image saved successfully in" + fileName + ".png");
+        console.log("Image saved successfully in " + fileName + ".png");
     } catch (error) {
         console.error(error);
+        throw error
     }
 };
 
@@ -20,8 +21,10 @@ fs.readFile("images.txt", "utf-8", (error, data) => {
 
     const lines = data.split("\n");
 
+
     for (const line of lines) {
-        const [fileName, url] = line.split(" ");
+        const url = line;
+        const fileName = line.split(/[=&]/)[1]
         saveImageByURL(url, fileName);
     }
 });
